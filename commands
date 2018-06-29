@@ -1,0 +1,5 @@
+//default run server command
+set DEBUG=expressapp:* & npm start
+
+//running with nodemon
+nodemon expressapp
