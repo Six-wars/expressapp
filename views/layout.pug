@@ -2,11 +2,14 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/css/style.css')
     link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
 
     script(type='text/javascript', src='/js/jquery.min.js')
     script(type='text/javascript', src='/js/bootstrap.min.js')
   body
-  	
+    nav.navbar.navbar-light
+      a.navbar-brand(href='/') Chat Sys
+        img.d-inline-block.align-top.margin-left(src='/img/bootstrap-solid.svg')
+      a.log-out-link.hidden(href='#') Log Out
     block content

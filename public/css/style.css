@@ -1,8 +1,67 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.navbar-brand img {
+	height: 30px;
+	width: 30px;
 }
 
-a {
-  color: #00B7FF;
+.navbar {
+	background-color: #0006;
+}
+
+.hidden {
+	display: none;
+}
+
+.margin-right {
+	margin-right: 5px;
+}
+
+.margin-left {
+	margin-left: 5px;
+}
+
+.login-btn {
+
+}
+
+/* Imported CSS  */
+.top-nav a {
+	margin-right: 5px;
+}
+
+.margin-top-10 {
+	margin-top: 10px;
+}
+
+.top-nav {
+	margin-top: 10px;
+	background-color: rgba(0, 0, 0, 0.35) !important;
+    border-radius: 5px;
+}
+
+.chat-box {
+	margin-top: 30px;
+}
+
+.sidebar {
+	background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 5px;
+    min-height: 400px;
+    padding-top: 10px;
+}
+
+.message-box {
+	background-color: rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+    min-height: 400px;
+    margin-left: 10px;
+}
+
+.users-list {
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+.users-list li {
+	color: blue;
+	cursor: pointer;
 }

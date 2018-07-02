@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.container
+    div.row
+      div.col-md-4.login-box
+        label Please Provide Username
+        input.username.margin-right(type='text')
+        button.btn.btn-primary.login-btn Login
+        p.hidden.login-error.text-danger Please type your username into the field
+    div.row.chat-box.hidden
+      div.col-md-2.sidebar
+        ul.user-list
+      div.col-md-9.message-box
+        div
+          textarea.form-control.input-message
