@@ -1,4 +1,6 @@
 var express = require('express');
+const models = require("./../models");
+
 var router = express.Router();
 
 /* GET home page. */
@@ -7,10 +9,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login-ajax', function (req, res) {
-  //use this as available users for now
   const userlist = ['sam', 'admin', 'another']
 
-  res.send('Got a POST request')
+  res.send('Post data received')
 })
 
 module.exports = router;
