@@ -5,7 +5,7 @@ const db = new Sequelize({
   storage: "./db.sqlite"
 });
 
-const User = db.define("post", {
+const User = db.define("user", {
   username: { type: Sequelize.STRING },
   loggedIn: { type: Sequelize.BOOLEAN }
 });
@@ -19,3 +19,5 @@ const Messages = db.define("messages", {
 })
 
 db.sync();
+
+module.exports = db;
