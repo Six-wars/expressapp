@@ -7,6 +7,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login-ajax', function (req, res) {
+  //use this as available users for now
+  const userlist = ['sam', 'admin', 'another']
+
   res.send('Got a POST request')
 })
 
