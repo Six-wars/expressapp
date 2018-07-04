@@ -3,6 +3,18 @@
 	width: 30px;
 }
 
+.online {
+	background-color: green;
+}
+
+.offline {
+	background-color: grey;
+}
+
+.status-icon {
+	border-radius: 50%;
+}
+
 .navbar {
 	background-color: #80808080;
 }
