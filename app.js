@@ -51,12 +51,18 @@ io.on('connection', function(socket) {
 
 	socket.on('users', function(data) {
 		var response_data = {'username': data.username, 'id': socket.id};
-		io.sockets.emit('users', data);
+		io.sockets.emit('users', response_data);
 	});
 
 	socket.on('disconnect', function (data) { 
-		socket.broadcast.emit({'id': socket.id});
+		console.log('disconnected user ', socket.id);
+		
+		io.sockets.emit('closed', {'id': socket.id});
 	});
+
+	socket.on('hello', function(data) {
+		socket.broadcast.emit('hello', data);
+	})
 });
 
 module.exports = app;

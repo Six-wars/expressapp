@@ -2,18 +2,32 @@ $( document ).ready(function() {
     //make socket connection
     var socket = io.connect('http://localhost:4000');
 
-    socket.on('disconnect', function(data) {
-    	console.log(socket.id);
+    socket.on('closed', function(data) {
+    	$(`.user-list li[unique_id="${data.id}"] i`).removeClass('online').addClass('offline');
+    });
+
+    socket.on('hello', function(data) {
+    	console.log(data);
     });
 
     //Listen for events
     socket.on('users', function(data) {
     	let current_username = $('.sp-username').text();
     	
+    	//check if username exists in list
+    	let exists = $(`.user-list li[user_id="${data.username}"]`).length;
+
     	//if new user add user to the list
-    	if (data.username != current_username) {
-    		$('.user-list').append(`<li user_id="${data.username}" unique_id="${data.id}"><i class="fas fa-circle"></i>${data.username}</li>`);
+    	if (data.username != current_username && exists == 0) {
+    		$('.user-list').append(`<li user_id="${data.username}" unique_id="${data.id}"><i class="fas fa-circle online"></i>${data.username}</li>`);
+    	} else if (exists == 1) { //if you already exist update some info and show you're active
+    		$(`.user-list li[user_id="${data.username}"]`).attr('unique_id', data.id);
+    		$(`.user-list li[user_id="${data.username}"] i`).removeClass('offline').addClass('online')
     	}
+
+    	socket.emit('hello', {
+    		username: current_username
+    	});
     });
 
     $('.login-btn').click(function() {
@@ -33,7 +47,7 @@ $( document ).ready(function() {
     	$('.login-box').addClass('hidden');
     	$('.chat-box').removeClass('hidden');
 
-    	$('.user-list').append(`<li user_id="${username}" unique_id="${socket.id}"><i class="fas fa-circle"></i>${username}</li>`);
+    	$('.user-list').append(`<li user_id="${username}" unique_id="${socket.id}"><i class="fas fa-circle online"></i>${username}</li>`);
 
     	socket.emit('users', {
     		username: username
