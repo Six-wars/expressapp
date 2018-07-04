@@ -4,7 +4,7 @@
 }
 
 .navbar {
-	background-color: grey;
+	background-color: #80808080;
 }
 
 .hidden {
@@ -19,9 +19,13 @@
 	margin-left: 5px;
 }
 
-.login-btn {
-
+.message-box {
+	position: absolute;
+	bottom: 8px;
+	width: 88%;
 }
+
+
 
 /* Imported CSS  */
 .top-nav a {
@@ -49,11 +53,12 @@
     padding-top: 10px;
 }
 
-.message-box {
+.content-box {
 	background-color: rgba(0, 0, 0, 0.09);
     border-radius: 5px;
     min-height: 400px;
     margin-left: 10px;
+    height: calc(100% - 18px);
 }
 
 .users-list {

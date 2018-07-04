@@ -9,8 +9,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login-ajax', function (req, res) {
-  const userlist = ['sam', 'admin', 'another']
-
   res.send('Post data received')
 })
 

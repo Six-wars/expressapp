@@ -13,5 +13,7 @@ html
     nav.navbar.navbar-light
       a.navbar-brand(href='/') Chat Sys
         img.d-inline-block.align-top.margin-left(src='/img/bootstrap-solid.svg')
-      a.log-out-link.hidden(href='#') Log Out
+      a.disabled.top-nav-username.hidden Welcome: 
+        span.sp-username
+      a.log-out.hidden(href='#') Log Out
     block content
