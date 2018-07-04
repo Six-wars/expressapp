@@ -1,18 +1,7 @@
 $( document ).ready(function() {
-    //make socket connection
-    var socket = io.connect('http://localhost:4000');
-
-    socket.on('closed', function(data) {
-    	$(`.user-list li[unique_id="${data.id}"] i`).removeClass('online').addClass('offline');
-    });
-
-    socket.on('hello', function(data) {
-    	console.log(data);
-    });
-
-    //Listen for events
-    socket.on('users', function(data) {
-    	let current_username = $('.sp-username').text();
+	//function for adding users to ul
+	function addUser(data) {
+		let current_username = $('.sp-username').text();
     	
     	//check if username exists in list
     	let exists = $(`.user-list li[user_id="${data.username}"]`).length;
@@ -24,6 +13,22 @@ $( document ).ready(function() {
     		$(`.user-list li[user_id="${data.username}"]`).attr('unique_id', data.id);
     		$(`.user-list li[user_id="${data.username}"] i`).removeClass('offline').addClass('online')
     	}
+	}
+
+    //make socket connection
+    var socket = io.connect('http://localhost:4000');
+
+    socket.on('closed', function(data) {
+    	$(`.user-list li[unique_id="${data.id}"] i`).removeClass('online').addClass('offline');
+    });
+
+    socket.on('hello', function(data) {
+    	addUser(data);
+    });
+
+    //Listen for events
+    socket.on('users', function(data) {
+    	addUser(data);
 
     	socket.emit('hello', {
     		username: current_username
