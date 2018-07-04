@@ -38,16 +38,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//socket setup
-var socket = require('socket.io');
-
-var server = app.listen(4000, function() {
-		
-});
-
-var io = socket(server);
-io.on('connection', function(socket) {
-	console.log('made socket connection')
-})
-
 module.exports = app;

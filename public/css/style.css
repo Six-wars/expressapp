@@ -61,12 +61,12 @@
     height: calc(100% - 18px);
 }
 
-.users-list {
+.user-list {
 	list-style-type: none;
 	padding-left: 0px;
 }
 
-.users-list li {
+.user-list li {
 	color: blue;
 	cursor: pointer;
 }
