@@ -2,13 +2,17 @@ $( document ).ready(function() {
     //make socket connection
     var socket = io.connect('http://localhost:4000');
 
+    socket.on('disconnect', function(data) {
+    	console.log(socket.id);
+    });
+
     //Listen for events
     socket.on('users', function(data) {
     	let current_username = $('.sp-username').text();
     	
     	//if new user add user to the list
     	if (data.username != current_username) {
-    		$('.user-list').append(`<li user_id="${data.username}"><i class="fas fa-circle"></i>${data.username}</li>`);
+    		$('.user-list').append(`<li user_id="${data.username}" unique_id="${data.id}"><i class="fas fa-circle"></i>${data.username}</li>`);
     	}
     });
 
@@ -29,7 +33,7 @@ $( document ).ready(function() {
     	$('.login-box').addClass('hidden');
     	$('.chat-box').removeClass('hidden');
 
-    	$('.user-list').append(`<li user_id="${username}"><i class="fas fa-circle"></i>${username}</li>`);
+    	$('.user-list').append(`<li user_id="${username}" unique_id="${socket.id}"><i class="fas fa-circle"></i>${username}</li>`);
 
     	socket.emit('users', {
     		username: username

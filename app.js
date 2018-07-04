@@ -50,8 +50,13 @@ io.on('connection', function(socket) {
 	console.log('made socket connection', socket.id);
 
 	socket.on('users', function(data) {
+		var response_data = {'username': data.username, 'id': socket.id};
 		io.sockets.emit('users', data);
 	});
-})
+
+	socket.on('disconnect', function (data) { 
+		socket.broadcast.emit({'id': socket.id});
+	});
+});
 
 module.exports = app;
