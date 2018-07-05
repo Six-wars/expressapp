@@ -33,6 +33,6 @@ There's also the `user is typing` or `user1, user2 is typing` if more than one w
 
 ![message](./img/message.jpg)
 
-And finally my way of presenting the messages from the user.
+And finally my way of presenting the messages from the user. To submit some text just press `Enter`
 
 So far I've not used a db because it was glitchy and I was just getting into NodeJS just for the sockets alone.
