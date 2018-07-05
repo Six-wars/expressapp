@@ -4,15 +4,13 @@
 }
 
 .online {
-	background-color: green;
+	color: green;
+	padding-right: 5px;
 }
 
 .offline {
-	background-color: grey;
-}
-
-.status-icon {
-	border-radius: 50%;
+	color: grey;
+	padding-right: 5px;
 }
 
 .navbar {
