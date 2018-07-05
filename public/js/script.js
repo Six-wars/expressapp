@@ -1,20 +1,4 @@
 $( document ).ready(function() {
-	//function for adding users to ul
-	function addUser(data) {
-		let current_username = $('.sp-username').text();
-    	
-    	//check if username exists in list
-    	let exists = $(`.user-list li[user_id="${data.username}"]`).length;
-
-    	//if new user add user to the list
-    	if (data.username != current_username && exists == 0) {
-    		$('.user-list').append(`<li user_id="${data.username}" unique_id="${data.id}"><i class="fas fa-circle online"></i>${data.username}</li>`);
-    	} else if (exists == 1) { //if you already exist update some info and show you're active
-    		$(`.user-list li[user_id="${data.username}"]`).attr('unique_id', data.id);
-    		$(`.user-list li[user_id="${data.username}"] i`).removeClass('offline').addClass('online')
-    	}
-	}
-
     //make socket connection
     var socket = io.connect('http://localhost:4000');
 
@@ -30,10 +14,49 @@ $( document ).ready(function() {
     socket.on('users', function(data) {
     	addUser(data);
 
+    	let current_username = $('.sp-username').text();
     	socket.emit('hello', {
     		username: current_username
     	});
     });
+
+    //function for adding users to ul
+	function addUser(data) {
+		let current_username = $('.sp-username').text();
+    	
+    	//check if username exists in list
+    	let exists = $(`.user-list li[user_id="${data.username}"]`).length;
+
+    	//if new user add user to the list
+    	if (data.username != current_username && exists == 0) {
+    		$('.user-list').append(`<li user_id="${data.username}" unique_id="${data.id}"><i class="fas fa-circle online"></i>${data.username}</li>`);
+    	} else if (exists == 1) { //if you already exist update some info and show you're active
+    		$(`.user-list li[user_id="${data.username}"]`).attr('unique_id', data.id);
+    		$(`.user-list li[user_id="${data.username}"] i`).removeClass('offline').addClass('online')
+    	}
+
+    	$.cookie(data.id, current_username);
+    	$.cookie('user-id', data.id);
+	}
+
+    //re login user if page refreshed, used socket.id so that it also works on the same browser
+    var user_id = $.cookie('user-id');
+    var username = $.cookie(user_id);
+    console.log(username);
+	if (username) {
+		$('.sp-username').text(username);
+		$('.top-nav-username').removeClass('hidden');
+    	$('.log-out').removeClass('hidden');
+
+    	$('.login-box').addClass('hidden');
+    	$('.chat-box').removeClass('hidden');
+
+    	$('.user-list').append(`<li user_id="${username}" unique_id="${socket.id}"><i class="fas fa-circle online"></i>${username}</li>`);
+
+    	socket.emit('users', {
+    		username: username
+    	});
+	}
 
     $('.login-btn').click(function() {
     	let username = $('.username').val();

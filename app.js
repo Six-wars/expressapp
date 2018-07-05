@@ -61,7 +61,8 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('hello', function(data) {
-		socket.broadcast.emit('hello', data);
+		var response_data = {'username': data.username, 'id': socket.id};
+		socket.broadcast.emit('hello', response_data);
 	})
 });
 
