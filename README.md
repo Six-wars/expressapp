@@ -3,13 +3,13 @@ Ever so interested in sockets I've decided to try it out with NodeJS since it's 
 
 I created the project using express recommended parameters
 
-> express --view=pug <appname>
+> express --view=pug `appname`
 
 At the time I didn't know `pug` was a template syntax which unlike jinja looks very little like html, on the plus side end up with a shorter tidier html template.
 
 The project runs using nodemon 
 
-> nodemon <appname>
+> nodemon `appname`
 
 You can fake login, no password necessary
 
