@@ -63,7 +63,12 @@ io.on('connection', function(socket) {
 	socket.on('hello', function(data) {
 		var response_data = {'username': data.username, 'id': socket.id};
 		socket.broadcast.emit('hello', response_data);
-	})
+	});
+
+	socket.on('bye', function(data) {
+		var response_data = {'username': data.username, 'id': socket.id};
+		socket.broadcast.emit('bye', response_data);
+	});
 });
 
 module.exports = app;

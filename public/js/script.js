@@ -10,12 +10,13 @@ $( document ).ready(function() {
     	addUser(data);
     });
 
+    socket.on('bye', function(data) {
+        $(`.user-list li[user_id="${data.username}"]`).html('');
+    });
+
     //Listen for events
     socket.on('users', function(data) {
         var current_user_id = $.cookie('user-id')
-
-        console.log(data.id);
-        console.log(current_user_id);
 
         if (data.id == current_user_id) {
             addUser(data);
@@ -55,8 +56,23 @@ $( document ).ready(function() {
     //re login user if page refreshed, used socket.id so that it also works on the same browser
     var user_id = $.cookie('user-id');
     var username = $.cookie(user_id);
-    socket.emit('users', {
-        username: username
+
+    $('.log-out').click(function() {
+        $.removeCookie('user-id');
+        $.removeCookie(user_id);
+
+        $('.login-error').addClass('hidden');
+
+        $('.sp-username').text('');
+        $('.top-nav-username').addClass('hidden');
+        $('.log-out').addClass('hidden');
+
+        $('.login-box').removeClass('hidden');
+        $('.chat-box').addClass('hidden');
+
+        socket.emit('bye', {
+            username: username
+        });
     });
 
     $('.login-btn').click(function() {
