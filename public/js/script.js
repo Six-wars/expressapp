@@ -13,10 +13,15 @@ $( document ).ready(function() {
     //Listen for events
     socket.on('users', function(data) {
         var current_user_id = $.cookie('user-id')
+
+        console.log(data.id);
+        console.log(current_user_id);
+
         if (data.id == current_user_id) {
             addUser(data);
         } else {
-            //do nothing for now
+            $.cookie('user-id', data.id);
+            $.cookie(data.id, data.username);
         }
 
     	let current_username = $('.sp-username').text();
