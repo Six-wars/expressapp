@@ -69,6 +69,20 @@ io.on('connection', function(socket) {
 		var response_data = {'username': data.username, 'id': socket.id};
 		socket.broadcast.emit('bye', response_data);
 	});
+
+	socket.on('typing', function(data) {
+		var response_data = {'username': data.username, 'id': socket.id};
+		socket.broadcast.emit('typing', response_data);
+	});
+
+	socket.on('end-typing', function(data) {
+		var response_data = {'username': data.username, 'id': socket.id};
+		socket.broadcast.emit('end-typing', response_data);
+	});
+
+	socket.on('message', function(data) {
+		io.sockets.emit('message', data);
+	});
 });
 
 module.exports = app;

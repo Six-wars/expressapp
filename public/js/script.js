@@ -14,6 +14,36 @@ $( document ).ready(function() {
         $(`.user-list li[user_id="${data.username}"]`).html('');
     });
 
+    var users_typing = [];
+    socket.on('typing', function(data) {
+    	if (users_typing.includes(data.username) == false) {
+    		users_typing.push(data.username);
+    	}
+
+    	if (users_typing.length > 0) {
+    		$('.typing').text(`${users_typing.join(", ")} is typing`);
+    	} else {
+    		$('.typing').text('');
+    	}
+
+        
+    });
+
+    socket.on('end-typing', function(data) {
+    	users_typing.pop(data.username);
+
+    	if (users_typing.length > 0) {
+    		$('.typing').text(`${users_typing.join(", ")} is typing`);
+    	} else {
+    		$('.typing').text('');
+    	}
+    });
+
+    socket.on('message', function(data) {
+    	$('.content-box').append(`<div class="card margin-top"><div class="card-body">${data.message}</br><span class="badge badge-secondary">${data.username}</span></div>`);
+    });
+
+
     //Listen for events
     socket.on('users', function(data) {
         var current_user_id = $.cookie('user-id')
@@ -73,6 +103,29 @@ $( document ).ready(function() {
         socket.emit('bye', {
             username: username
         });
+    });
+
+    $('.message-box').keypress(function(e) {
+    	var username = $('.sp-username').text();
+    	if(e.which == 13) { // Enter key pressed
+    		let message = $(this).val();
+    		socket.emit('message', {
+    			username: username,
+    			'message': message,
+    		});
+    		$(this).val('');
+    	} else {
+	    	socket.emit('typing', {
+	    		username: username
+	    	});
+    	}
+    });
+
+    $('.message-box').focusout(function() {
+    	var username = $('.sp-username').text();
+    	socket.emit('end-typing', {
+    		username: username
+    	})
     });
 
     $('.login-btn').click(function() {
