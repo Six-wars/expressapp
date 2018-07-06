@@ -1,4 +1,5 @@
-#Chat App in NodeJS
+#ChatApp in NodeJS
+
 Ever so interested in sockets I've decided to try it out with NodeJS since it's basically javascript ontop of C as a server-side framework.
 
 I created the project using express recommended parameters
@@ -9,7 +10,7 @@ At the time I didn't know `pug` was a template syntax which unlike jinja looks v
 
 The project runs using nodemon 
 
-> nodemon `appname`
+> nodemon expressapp
 
 You can fake login, no password necessary
 
