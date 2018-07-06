@@ -16,7 +16,7 @@ $( document ).ready(function() {
 
     //Listen for events
     socket.on('users', function(data) {
-        var current_user_id = $.cookie('user-id')
+        var current_user_id = $.cookie('user-id');
 
         if (data.id == current_user_id) {
             addUser(data);
