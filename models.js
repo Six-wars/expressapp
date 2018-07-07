@@ -16,6 +16,6 @@ const Messages = db.define("messages", {
 	messsage: { type: Sequelize.BOOLEAN },
 	createdBy: { type: Sequelize.STRING },
 	createdAt: { type: Sequelize.DATE }
-})
+});
 
 db.sync();
