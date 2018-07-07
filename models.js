@@ -19,3 +19,8 @@ const Messages = db.define("messages", {
 });
 
 db.sync();
+
+module.exports = {
+    User: User,
+    Messages: Messages
+};

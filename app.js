@@ -7,6 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var models = require('./models');
+
+models.User.findAll({where: {username: 'test'}}).then(users => {
+	for (user of users) {
+		console.log(`User id ${user.id} with username ${user.username}`);
+	}
+});
+
 var app = express();
 
 // view engine setup
