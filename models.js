@@ -93,6 +93,30 @@ Project.findAndCountAll({
 });
 */
 
+//findall
+/*
+// find multiple entries
+Project.findAll().then(projects => {
+  // projects will be an array of all Project instances
+})
+
+// also possible:
+Project.all().then(projects => {
+  // projects will be an array of all Project instances
+})
+
+// search for specific attributes - hash usage
+Project.findAll({ where: { name: 'A Project' } }).then(projects => {
+  // projects will be an array of Project instances with the specified name
+})
+
+// search within a specific range
+Project.findAll({ where: { id: [1,2,3] } }).then(projects => {
+  // projects will be an array of Projects having the id 1, 2 or 3
+  // this is actually doing an IN query
+})
+*/
+
 const Sequelize = require("sequelize");
 
 const db = new Sequelize({
